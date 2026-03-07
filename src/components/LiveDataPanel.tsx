@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Sun, Zap, Building2, Home, Factory, Lightbulb, ArrowRight, ArrowLeft, TrendingUp, Gauge, BarChart3 } from "lucide-react";
 
 interface LiveDataPanelProps {
   solarOutput: number;
@@ -8,7 +9,7 @@ interface LiveDataPanelProps {
   systemStatus: string;
 }
 
-const DataCard = ({ label, value, unit, color, icon }: { label: string; value: string; unit: string; color: string; icon: string }) => {
+const DataCard = ({ label, value, unit, color, icon: Icon }: { label: string; value: string; unit: string; color: string; icon: React.ElementType }) => {
   const colorClasses: Record<string, string> = {
     blue: "border-neon-blue/40 shadow-[0_0_15px_hsl(195_100%_50%/0.1)]",
     green: "border-neon-green/40 shadow-[0_0_15px_hsl(150_80%_45%/0.1)]",
@@ -23,18 +24,24 @@ const DataCard = ({ label, value, unit, color, icon }: { label: string; value: s
     cyan: "text-neon-cyan",
     red: "text-neon-red",
   };
+  const iconClasses: Record<string, string> = {
+    blue: "text-neon-blue",
+    green: "text-neon-green",
+    amber: "text-neon-amber",
+    cyan: "text-neon-cyan",
+    red: "text-neon-red",
+  };
 
   return (
     <div className={`bg-card border rounded-lg p-3 ${colorClasses[color]}`}>
       <div className="flex items-center gap-2 mb-2">
-        <span className="text-lg">{icon}</span>
+        <Icon className={`w-4 h-4 ${iconClasses[color]}`} />
         <span className="font-display text-[10px] tracking-widest text-muted-foreground uppercase">{label}</span>
       </div>
       <div className="flex items-baseline gap-1">
         <span className={`font-mono text-2xl font-bold ${textClasses[color]}`}>{value}</span>
         <span className="text-xs text-muted-foreground">{unit}</span>
       </div>
-      {/* Mini bar */}
       <div className="mt-2 h-1 bg-muted rounded-full overflow-hidden">
         <div
           className={`h-full rounded-full transition-all duration-500 ${color === "blue" ? "bg-neon-blue" : color === "green" ? "bg-neon-green" : color === "amber" ? "bg-neon-amber" : color === "red" ? "bg-neon-red" : "bg-neon-cyan"}`}
@@ -56,20 +63,26 @@ const LiveDataPanel = ({ solarOutput, voltage, loadDemand, isReversed, systemSta
 
   return (
     <div className="glow-card p-4 flex flex-col gap-3 h-full">
-      <h2 className="font-display text-xs tracking-widest text-primary glow-text-blue">
-        📊 LIVE GRID DATA
-      </h2>
+      <div className="flex items-center gap-2">
+        <BarChart3 className="w-4 h-4 text-primary" />
+        <h2 className="font-display text-xs tracking-widest text-primary glow-text-blue">
+          LIVE GRID DATA
+        </h2>
+      </div>
 
-      <DataCard icon="☀" label="Solar Generation" value={solarOutput.toFixed(1)} unit="kW" color="amber" />
-      <DataCard icon="⚡" label="Feeder Voltage" value={voltage.toFixed(1)} unit="V" color="blue" />
-      <DataCard icon="🏠" label="Load Demand" value={loadDemand.toFixed(1)} unit="kW" color="green" />
-      <DataCard icon={isReversed ? "⬅" : "➡"} label="Power Flow" value={isReversed ? "REVERSE" : "FORWARD"} unit="" color={isReversed ? "amber" : "cyan"} />
-      <DataCard icon="🔋" label="Grid Stability" value={systemStatus.toUpperCase()} unit="" color={systemStatus === "stable" ? "green" : "red"} />
+      <DataCard icon={Sun} label="Solar Generation" value={solarOutput.toFixed(1)} unit="kW" color="amber" />
+      <DataCard icon={Zap} label="Feeder Voltage" value={voltage.toFixed(1)} unit="V" color="blue" />
+      <DataCard icon={Home} label="Load Demand" value={loadDemand.toFixed(1)} unit="kW" color="green" />
+      <DataCard icon={isReversed ? ArrowLeft : ArrowRight} label="Power Flow" value={isReversed ? "REVERSE" : "FORWARD"} unit="" color={isReversed ? "amber" : "cyan"} />
+      <DataCard icon={Gauge} label="Grid Stability" value={systemStatus.toUpperCase()} unit="" color={systemStatus === "stable" ? "green" : "red"} />
 
       {/* Mini sparkline */}
       <div className="mt-auto">
-        <span className="font-display text-[10px] text-muted-foreground tracking-widest">SOLAR OUTPUT TREND</span>
-        <div className="flex items-end gap-0.5 h-12 mt-1">
+        <div className="flex items-center gap-2 mb-1">
+          <TrendingUp className="w-3 h-3 text-muted-foreground" />
+          <span className="font-display text-[10px] text-muted-foreground tracking-widest">SOLAR OUTPUT TREND</span>
+        </div>
+        <div className="flex items-end gap-0.5 h-12">
           {history.map((v, i) => (
             <div
               key={i}
