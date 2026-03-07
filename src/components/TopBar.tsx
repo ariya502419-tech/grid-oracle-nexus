@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Activity, Radio, Clock, Wifi } from "lucide-react";
 
 const TopBar = ({ systemStatus = "stable" }: { systemStatus?: string }) => {
   const [time, setTime] = useState(new Date());
@@ -15,7 +14,7 @@ const TopBar = ({ systemStatus = "stable" }: { systemStatus?: string }) => {
   return (
     <div className="flex items-center justify-between px-6 py-3 neon-border bg-card/80 backdrop-blur-sm">
       <div className="flex items-center gap-4">
-        <Activity className="w-4 h-4 text-primary animate-pulse-glow" />
+        <div className="w-2 h-2 rounded-full bg-neon-blue animate-pulse-glow" />
         <h1 className="font-display text-sm md:text-base tracking-wider text-primary glow-text-blue">
           SMART RENEWABLE GRID DIGITAL TWIN
         </h1>
@@ -30,16 +29,13 @@ const TopBar = ({ systemStatus = "stable" }: { systemStatus?: string }) => {
         </div>
 
         <div className="hidden md:flex items-center gap-2 text-muted-foreground">
-          <Wifi className="w-3 h-3 text-neon-red animate-pulse-glow" />
           <span className="font-mono text-xs">LIVE</span>
+          <div className="w-1.5 h-1.5 rounded-full bg-neon-red animate-pulse-glow" />
         </div>
 
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Clock className="w-3 h-3" />
-          <span className="font-mono text-xs tracking-wider">
-            {time.toLocaleTimeString()}
-          </span>
-        </div>
+        <span className="font-mono text-xs text-muted-foreground tracking-wider">
+          {time.toLocaleTimeString()}
+        </span>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Sun, ArrowLeft, TrendingUp, Zap } from "lucide-react";
 
 const MPPTOptimization = () => {
   const navigate = useNavigate();
@@ -21,45 +20,25 @@ const MPPTOptimization = () => {
 
   return (
     <div className="min-h-screen bg-background grid-bg flex flex-col">
+      {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-3 neon-border bg-card/80">
-        <div className="flex items-center gap-3">
-          <Sun className="w-5 h-5 text-neon-amber" />
-          <h1 className="font-display text-sm tracking-widest text-primary glow-text-blue">
-            SOLAR MPPT OPTIMIZATION SYSTEM
-          </h1>
-        </div>
+        <h1 className="font-display text-sm tracking-widest text-primary glow-text-blue">
+          ☀ SOLAR MPPT OPTIMIZATION SYSTEM
+        </h1>
         <button
           onClick={() => navigate("/")}
-          className="py-2 px-4 rounded-md font-display text-xs tracking-wider neon-border bg-card hover:bg-muted transition-colors text-primary flex items-center gap-2"
+          className="py-2 px-4 rounded-md font-display text-xs tracking-wider neon-border bg-card hover:bg-muted transition-colors text-primary"
         >
-          <ArrowLeft className="w-3 h-3" />
-          BACK TO DASHBOARD
+          ← BACK TO DASHBOARD
         </button>
       </div>
 
       <div className="flex-1 p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto w-full">
+        {/* Left - Controls */}
         <div className="flex flex-col gap-6">
           <div className="glow-card p-6">
             <div className="text-center mb-6">
-              {/* Solar panel SVG icon */}
-              <svg width="80" height="80" viewBox="0 0 80 80" className="mx-auto">
-                <defs>
-                  <filter id="solarGlow">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-                  </filter>
-                </defs>
-                <rect x="15" y="25" width="50" height="35" rx="3" fill="none" stroke="#facc15" strokeWidth="1.5" />
-                <line x1="32" y1="25" x2="32" y2="60" stroke="#facc15" strokeWidth="0.8" opacity="0.5" />
-                <line x1="48" y1="25" x2="48" y2="60" stroke="#facc15" strokeWidth="0.8" opacity="0.5" />
-                <line x1="15" y1="37" x2="65" y2="37" stroke="#facc15" strokeWidth="0.8" opacity="0.5" />
-                <line x1="15" y1="48" x2="65" y2="48" stroke="#facc15" strokeWidth="0.8" opacity="0.5" />
-                <circle cx="62" cy="16" r="8" fill="none" stroke="#facc15" strokeWidth="1" opacity="0.6" filter="url(#solarGlow)" />
-                <circle cx="62" cy="16" r="3" fill="#facc15" opacity="0.8" />
-                <line x1="62" y1="4" x2="62" y2="8" stroke="#facc15" strokeWidth="0.8" opacity="0.5" />
-                <line x1="72" y1="10" x2="70" y2="12" stroke="#facc15" strokeWidth="0.8" opacity="0.5" />
-                <line x1="72" y1="22" x2="70" y2="20" stroke="#facc15" strokeWidth="0.8" opacity="0.5" />
-              </svg>
+              <span className="text-6xl">☀</span>
               <h2 className="font-display text-lg text-foreground mt-2">Solar Panel Array</h2>
             </div>
 
@@ -81,21 +60,16 @@ const MPPTOptimization = () => {
             </div>
           </div>
 
+          {/* Comparison Cards */}
           <div className="grid grid-cols-2 gap-4">
             <div className="glow-card p-4 border-neon-red/30">
-              <div className="flex items-center gap-2 mb-2">
-                <Zap className="w-3 h-3 text-neon-red" />
-                <span className="font-display text-[10px] tracking-widest text-muted-foreground">WITHOUT MPPT</span>
-              </div>
+              <span className="font-display text-[10px] tracking-widest text-muted-foreground">WITHOUT MPPT</span>
               <div className="font-mono text-3xl text-neon-red mt-2">{withoutMppt.toFixed(1)}</div>
               <span className="text-xs text-muted-foreground">kW output</span>
               <div className="mt-2 text-xs text-neon-red font-mono">65% efficiency</div>
             </div>
             <div className="glow-card-green p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <TrendingUp className="w-3 h-3 text-neon-green" />
-                <span className="font-display text-[10px] tracking-widest text-muted-foreground">WITH MPPT</span>
-              </div>
+              <span className="font-display text-[10px] tracking-widest text-muted-foreground">WITH MPPT</span>
               <div className="font-mono text-3xl text-neon-green mt-2">{withMppt.toFixed(1)}</div>
               <span className="text-xs text-muted-foreground">kW output</span>
               <div className="mt-2 text-xs text-neon-green font-mono">92% efficiency</div>
@@ -110,11 +84,9 @@ const MPPTOptimization = () => {
           </div>
         </div>
 
+        {/* Right - Graph */}
         <div className="glow-card p-6 flex flex-col">
-          <div className="flex items-center gap-2 mb-4">
-            <TrendingUp className="w-4 h-4 text-primary" />
-            <h3 className="font-display text-xs tracking-widest text-primary">OUTPUT COMPARISON</h3>
-          </div>
+          <h3 className="font-display text-xs tracking-widest text-primary mb-4">📈 OUTPUT COMPARISON</h3>
           <div className="flex-1 flex items-end gap-1 min-h-[300px]">
             {history.map((h, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1 justify-end h-full">
