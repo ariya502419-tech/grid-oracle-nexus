@@ -99,19 +99,20 @@ const GridDiagram = ({ solarOutput, isReversed }: GridDiagramProps) => {
             <text x="0" y="5" textAnchor="middle" fill="hsl(200 100% 90%)" fontSize="9" fontFamily="Orbitron">TRANSFORMER</text>
           </g>
 
-          {/* Flow line Transformer → Loads */}
-          <line x1="690" y1="100" x2="690" y2="200" stroke="hsl(195 100% 50% / 0.2)" strokeWidth="2" />
-          <line
-            x1="690" y1="100" x2="690" y2="200"
+          {/* Flow line Transformer → Loads (L-shaped path) */}
+          <path d="M 650 100 L 700 100 L 700 220" stroke="hsl(195 100% 50% / 0.2)" strokeWidth="2" fill="none" />
+          <path
+            d="M 650 100 L 700 100 L 700 220"
             stroke="#0ea5e9"
             strokeWidth="2"
             strokeDasharray="8 12"
             strokeDashoffset={-animOffset}
             opacity="0.8"
+            fill="none"
           />
 
           {/* Loads */}
-          <g transform="translate(690, 240)" filter="url(#glow)">
+          <g transform="translate(700, 255)" filter="url(#glow)">
             <rect x="-35" y="-30" width="70" height="60" rx="8" fill="hsl(220 25% 12%)" stroke="#10b981" strokeWidth="1.5" />
             {/* House icon */}
             <polygon points="0,-48 -10,-38 10,-38" fill="none" stroke="#10b981" strokeWidth="1.5" />
