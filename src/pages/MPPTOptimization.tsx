@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Sun, ArrowLeft, TrendingUp } from "lucide-react";
 
 const MPPTOptimization = () => {
   const navigate = useNavigate();
@@ -20,25 +21,23 @@ const MPPTOptimization = () => {
 
   return (
     <div className="min-h-screen bg-background grid-bg flex flex-col">
-      {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-3 neon-border bg-card/80">
-        <h1 className="font-display text-sm tracking-widest text-primary glow-text-blue">
-          ☀ SOLAR MPPT OPTIMIZATION SYSTEM
+        <h1 className="font-display text-sm tracking-widest text-primary glow-text-blue flex items-center gap-2">
+          <Sun size={16} /> SOLAR MPPT OPTIMIZATION SYSTEM
         </h1>
         <button
           onClick={() => navigate("/")}
-          className="py-2 px-4 rounded-md font-display text-xs tracking-wider neon-border bg-card hover:bg-muted transition-colors text-primary"
+          className="py-2 px-4 rounded-md font-display text-xs tracking-wider neon-border bg-card hover:bg-muted transition-colors text-primary flex items-center gap-2"
         >
-          ← BACK TO DASHBOARD
+          <ArrowLeft size={14} /> BACK TO DASHBOARD
         </button>
       </div>
 
       <div className="flex-1 p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto w-full">
-        {/* Left - Controls */}
         <div className="flex flex-col gap-6">
           <div className="glow-card p-6">
             <div className="text-center mb-6">
-              <span className="text-6xl">☀</span>
+              <Sun size={48} className="mx-auto text-neon-amber" />
               <h2 className="font-display text-lg text-foreground mt-2">Solar Panel Array</h2>
             </div>
 
@@ -60,7 +59,6 @@ const MPPTOptimization = () => {
             </div>
           </div>
 
-          {/* Comparison Cards */}
           <div className="grid grid-cols-2 gap-4">
             <div className="glow-card p-4 border-neon-red/30">
               <span className="font-display text-[10px] tracking-widest text-muted-foreground">WITHOUT MPPT</span>
@@ -78,15 +76,16 @@ const MPPTOptimization = () => {
 
           <div className="glow-card p-4">
             <p className="text-sm text-muted-foreground leading-relaxed">
-              <span className="text-neon-green font-semibold">MPPT</span> continuously adjusts the solar operating point to extract maximum power. 
+              <span className="text-neon-green font-semibold">MPPT</span> continuously adjusts the solar operating point to extract maximum power.
               It tracks the voltage-current curve in real-time, ensuring the system always operates at peak efficiency regardless of changing sunlight and temperature conditions.
             </p>
           </div>
         </div>
 
-        {/* Right - Graph */}
         <div className="glow-card p-6 flex flex-col">
-          <h3 className="font-display text-xs tracking-widest text-primary mb-4">📈 OUTPUT COMPARISON</h3>
+          <h3 className="font-display text-xs tracking-widest text-primary mb-4 flex items-center gap-2">
+            <TrendingUp size={14} /> OUTPUT COMPARISON
+          </h3>
           <div className="flex-1 flex items-end gap-1 min-h-[300px]">
             {history.map((h, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1 justify-end h-full">

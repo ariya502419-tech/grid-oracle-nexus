@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Plug, ArrowLeft, BarChart3, Sun, Square, AlertTriangle, CheckCircle2 } from "lucide-react";
 
 const VoltageStabilization = () => {
   const navigate = useNavigate();
@@ -10,14 +11,12 @@ const VoltageStabilization = () => {
 
   useEffect(() => {
     if (solarIncrease) {
-      // Voltage rises
       let v = 230;
       const riseInterval = setInterval(() => {
         v += 2;
         if (v >= 250) {
           clearInterval(riseInterval);
           setVoltage(250);
-          // Regulator activates after delay
           setTimeout(() => {
             setRegulatorActive(true);
             let rv = 250;
@@ -54,24 +53,22 @@ const VoltageStabilization = () => {
   return (
     <div className="min-h-screen bg-background grid-bg flex flex-col">
       <div className="flex items-center justify-between px-6 py-3 neon-border bg-card/80">
-        <h1 className="font-display text-sm tracking-widest text-primary glow-text-blue">
-          🔌 SMART VOLTAGE CONTROL SYSTEM
+        <h1 className="font-display text-sm tracking-widest text-primary glow-text-blue flex items-center gap-2">
+          <Plug size={16} /> SMART VOLTAGE CONTROL SYSTEM
         </h1>
         <button
           onClick={() => navigate("/")}
-          className="py-2 px-4 rounded-md font-display text-xs tracking-wider neon-border bg-card hover:bg-muted transition-colors text-primary"
+          className="py-2 px-4 rounded-md font-display text-xs tracking-wider neon-border bg-card hover:bg-muted transition-colors text-primary flex items-center gap-2"
         >
-          ← BACK TO DASHBOARD
+          <ArrowLeft size={14} /> BACK TO DASHBOARD
         </button>
       </div>
 
       <div className="flex-1 p-6 max-w-5xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Left - Meter & Controls */}
         <div className="flex flex-col gap-6">
-          {/* Voltage Meter */}
           <div className="glow-card p-6 flex flex-col items-center">
             <h3 className="font-display text-xs tracking-widest text-primary mb-6">VOLTAGE METER</h3>
-            
+
             <div className="relative w-48 h-48">
               <svg viewBox="0 0 200 200" className="w-full h-full">
                 <defs>
@@ -83,9 +80,7 @@ const VoltageStabilization = () => {
                     </feMerge>
                   </filter>
                 </defs>
-                {/* Background arc */}
                 <circle cx="100" cy="100" r="80" fill="none" stroke="hsl(220 25% 15%)" strokeWidth="12" strokeDasharray="377 503" strokeDashoffset="-63" strokeLinecap="round" />
-                {/* Value arc */}
                 <circle
                   cx="100" cy="100" r="80"
                   fill="none"
@@ -97,7 +92,6 @@ const VoltageStabilization = () => {
                   filter="url(#glowV)"
                   className="transition-all duration-300"
                 />
-                {/* Value text */}
                 <text x="100" y="95" textAnchor="middle" fill="hsl(200 100% 90%)" fontSize="32" fontFamily="Orbitron" fontWeight="bold">
                   {voltage.toFixed(0)}
                 </text>
@@ -107,31 +101,28 @@ const VoltageStabilization = () => {
               </svg>
             </div>
 
-            {/* Status */}
-            <div className={`mt-4 px-4 py-2 rounded-lg text-sm font-display tracking-wider ${
+            <div className={`mt-4 px-4 py-2 rounded-lg text-sm font-display tracking-wider flex items-center gap-2 ${
               isHigh
                 ? "bg-neon-red/10 text-neon-red border border-neon-red/30"
                 : regulatorActive
                 ? "bg-neon-green/10 text-neon-green border border-neon-green/30"
                 : "bg-neon-blue/10 text-neon-blue border border-neon-blue/30"
             }`}>
-              {isHigh ? "⚠ OVERVOLTAGE WARNING" : regulatorActive ? "✔ VOLTAGE STABILIZED" : "✔ NORMAL — 230V"}
+              {isHigh ? <><AlertTriangle size={14} /> OVERVOLTAGE WARNING</> : regulatorActive ? <><CheckCircle2 size={14} /> VOLTAGE STABILIZED</> : <><CheckCircle2 size={14} /> NORMAL — 230V</>}
             </div>
           </div>
 
-          {/* Simulate Button */}
           <button
             onClick={() => setSolarIncrease(!solarIncrease)}
-            className={`py-3 px-4 rounded-lg font-display text-xs tracking-widest transition-all ${
+            className={`py-3 px-4 rounded-lg font-display text-xs tracking-widest transition-all flex items-center justify-center gap-2 ${
               solarIncrease
                 ? "bg-neon-red/20 text-neon-red border border-neon-red/40 hover:bg-neon-red/30"
                 : "bg-neon-amber/20 text-neon-amber border border-neon-amber/40 hover:bg-neon-amber/30"
             }`}
           >
-            {solarIncrease ? "⏹ RESET SIMULATION" : "☀ SIMULATE SOLAR INCREASE"}
+            {solarIncrease ? <><Square size={14} /> RESET SIMULATION</> : <><Sun size={14} /> SIMULATE SOLAR INCREASE</>}
           </button>
 
-          {/* Explanation */}
           <div className="glow-card p-4">
             <p className="text-sm text-muted-foreground leading-relaxed">
               When solar generation increases rapidly, voltage can rise above safe limits (240V+).
@@ -140,11 +131,11 @@ const VoltageStabilization = () => {
           </div>
         </div>
 
-        {/* Right - Voltage Graph */}
         <div className="glow-card p-6 flex flex-col">
-          <h3 className="font-display text-xs tracking-widest text-primary mb-4">📊 VOLTAGE HISTORY</h3>
+          <h3 className="font-display text-xs tracking-widest text-primary mb-4 flex items-center gap-2">
+            <BarChart3 size={14} /> VOLTAGE HISTORY
+          </h3>
           <div className="flex-1 relative min-h-[300px]">
-            {/* Reference lines */}
             <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
               <div className="border-t border-neon-red/20 relative">
                 <span className="absolute -top-3 right-0 font-mono text-[10px] text-neon-red">250V</span>
@@ -163,7 +154,6 @@ const VoltageStabilization = () => {
               </div>
             </div>
 
-            {/* Graph bars */}
             <div className="absolute inset-0 flex items-end gap-0.5 pt-4 pb-0">
               {voltageHistory.map((v, i) => {
                 const h = ((v - minV) / (maxV - minV)) * 100;
