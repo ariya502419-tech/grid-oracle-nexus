@@ -14,9 +14,18 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Orbitron", "monospace"],
-        body: ["Rajdhani", "sans-serif"],
+        display: ["Exo 2", "Orbitron", "sans-serif"],
+        body: ["Exo 2", "Rajdhani", "sans-serif"],
         mono: ["Share Tech Mono", "monospace"],
+      },
+      fontSize: {
+        'xs': ['0.8rem', { lineHeight: '1.2rem' }],
+        'sm': ['0.925rem', { lineHeight: '1.35rem' }],
+        'base': ['1.05rem', { lineHeight: '1.6rem' }],
+        'lg': ['1.2rem', { lineHeight: '1.75rem' }],
+        'xl': ['1.35rem', { lineHeight: '1.85rem' }],
+        '2xl': ['1.6rem', { lineHeight: '2rem' }],
+        '3xl': ['2rem', { lineHeight: '2.35rem' }],
       },
       colors: {
         border: "hsl(var(--border))",
