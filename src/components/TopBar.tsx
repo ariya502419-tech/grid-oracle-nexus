@@ -16,7 +16,7 @@ const TopBar = ({ systemStatus = "stable" }: { systemStatus?: string }) => {
       <div className="flex items-center gap-4">
         <div className="w-2 h-2 rounded-full bg-neon-blue animate-pulse-glow" />
         <h1 className="font-display text-sm md:text-base tracking-wider text-primary glow-text-blue">
-          SMART RENEWABLE GRID DIGITAL TWIN
+          GRIDTWIN DASHBOARD
         </h1>
       </div>
 
