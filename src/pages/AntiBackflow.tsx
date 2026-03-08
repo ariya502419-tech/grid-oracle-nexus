@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Zap, ArrowLeft, Home, AlertTriangle, CheckCircle2, Info } from "lucide-react";
 
 const AntiBackflow = () => {
   const navigate = useNavigate();
@@ -28,19 +29,18 @@ const AntiBackflow = () => {
   return (
     <div className="min-h-screen bg-background grid-bg flex flex-col">
       <div className="flex items-center justify-between px-6 py-3 neon-border bg-card/80">
-        <h1 className="font-display text-sm tracking-widest text-primary glow-text-blue">
-          ⚡ REVERSE POWER FLOW MONITORING
+        <h1 className="font-display text-sm tracking-widest text-primary glow-text-blue flex items-center gap-2">
+          <Zap size={16} /> REVERSE POWER FLOW MONITORING
         </h1>
         <button
           onClick={() => navigate("/")}
-          className="py-2 px-4 rounded-md font-display text-xs tracking-wider neon-border bg-card hover:bg-muted transition-colors text-primary"
+          className="py-2 px-4 rounded-md font-display text-xs tracking-wider neon-border bg-card hover:bg-muted transition-colors text-primary flex items-center gap-2"
         >
-          ← BACK TO DASHBOARD
+          <ArrowLeft size={14} /> BACK TO DASHBOARD
         </button>
       </div>
 
       <div className="flex-1 p-6 max-w-5xl mx-auto w-full flex flex-col gap-6">
-        {/* Flow Diagram */}
         <div className="glow-card p-6">
           <h3 className="font-display text-xs tracking-widest text-primary mb-4">POWER FLOW DIAGRAM</h3>
           <svg viewBox="0 0 700 200" className="w-full" preserveAspectRatio="xMidYMid meet">
@@ -57,7 +57,9 @@ const AntiBackflow = () => {
             {/* House + Solar */}
             <g transform="translate(120, 100)" filter="url(#glowAB)">
               <rect x="-50" y="-40" width="100" height="80" rx="8" fill="hsl(220 25% 12%)" stroke="#facc15" strokeWidth="1.5" />
-              <text x="0" y="-50" textAnchor="middle" fontSize="28">🏠</text>
+              {/* House icon */}
+              <polygon points="0,-58 -14,-45 14,-45" fill="none" stroke="#facc15" strokeWidth="1.5" />
+              <rect x="-10" y="-45" width="20" height="15" fill="none" stroke="#facc15" strokeWidth="1.5" />
               <text x="0" y="0" textAnchor="middle" fill="hsl(200 100% 90%)" fontSize="10" fontFamily="Orbitron">HOUSE +</text>
               <text x="0" y="15" textAnchor="middle" fill="#facc15" fontSize="10" fontFamily="Orbitron">SOLAR</text>
             </g>
@@ -75,20 +77,20 @@ const AntiBackflow = () => {
 
             {/* Direction label */}
             <text x="350" y="80" textAnchor="middle" fill={flowColor} fontSize="12" fontFamily="Share Tech Mono">
-              {isReversed ? "◀ REVERSE FLOW ◀" : "▶ NORMAL FLOW ▶"}
+              {isReversed ? "REVERSE FLOW" : "NORMAL FLOW"}
             </text>
 
             {/* Grid */}
             <g transform="translate(550, 100)" filter="url(#glowAB)">
               <rect x="-50" y="-40" width="100" height="80" rx="8" fill="hsl(220 25% 12%)" stroke="#0ea5e9" strokeWidth="1.5" />
-              <text x="0" y="-50" textAnchor="middle" fontSize="28">⚡</text>
+              {/* Zap icon */}
+              <polygon points="0,-58 -6,-46 -1,-46 -4,-34 6,-48 1,-48 4,-58" fill="#0ea5e9" />
               <text x="0" y="5" textAnchor="middle" fill="hsl(200 100% 90%)" fontSize="10" fontFamily="Orbitron">GRID</text>
             </g>
           </svg>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Controls */}
           <div className="flex flex-col gap-4">
             <div className="glow-card p-6">
               <label className="font-display text-xs tracking-widest text-muted-foreground mb-2 block">
@@ -109,17 +111,16 @@ const AntiBackflow = () => {
               </div>
             </div>
 
-            {/* Alert */}
             {isReversed && (
               <div className={`p-4 rounded-lg border ${systemActive ? "border-neon-green/40 bg-neon-green/5" : "border-neon-amber/40 bg-neon-amber/5"} transition-all duration-500`}>
                 {!systemActive ? (
                   <>
-                    <div className="font-display text-sm text-neon-amber">⚠ REVERSE POWER FLOW DETECTED</div>
+                    <div className="font-display text-sm text-neon-amber flex items-center gap-2"><AlertTriangle size={16} /> REVERSE POWER FLOW DETECTED</div>
                     <p className="text-xs text-muted-foreground mt-1">Solar export exceeding load demand. Activating countermeasures...</p>
                   </>
                 ) : (
                   <>
-                    <div className="font-display text-sm text-neon-green">✔ ANTI-BACKFLOW SYSTEM ACTIVE</div>
+                    <div className="font-display text-sm text-neon-green flex items-center gap-2"><CheckCircle2 size={16} /> ANTI-BACKFLOW SYSTEM ACTIVE</div>
                     <p className="text-xs text-muted-foreground mt-1">Solar export limited. Feeder stabilized. Grid protected.</p>
                   </>
                 )}
@@ -128,13 +129,12 @@ const AntiBackflow = () => {
 
             {!isReversed && (
               <div className="p-4 rounded-lg border border-neon-blue/30 bg-neon-blue/5">
-                <div className="font-display text-sm text-neon-blue">✔ NORMAL OPERATION</div>
+                <div className="font-display text-sm text-neon-blue flex items-center gap-2"><CheckCircle2 size={16} /> NORMAL OPERATION</div>
                 <p className="text-xs text-muted-foreground mt-1">Power flowing from grid to loads. No reverse flow detected.</p>
               </div>
             )}
           </div>
 
-          {/* System Response */}
           <div className="glow-card p-6">
             <h3 className="font-display text-xs tracking-widest text-primary mb-4">SYSTEM RESPONSE</h3>
             <div className="space-y-3">
