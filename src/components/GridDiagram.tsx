@@ -66,7 +66,7 @@ const GridDiagram = ({ solarOutput, isReversed }: GridDiagramProps) => {
             <span className="text-muted-foreground text-xs">{isReversed ? "◂" : "▸"}</span>
             <div className="flex items-center gap-1.5">
               <div className="w-1.5 h-1.5 rounded-full bg-neon-blue" />
-              <span className="font-mono text-[11px] text-neon-blue">Transformer</span>
+              <span className="font-mono text-[11px] text-neon-blue">Power Plant</span>
             </div>
             <span className="text-muted-foreground text-xs">▸</span>
             <div className="flex items-center gap-1.5">
