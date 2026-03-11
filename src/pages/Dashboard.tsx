@@ -3,6 +3,7 @@ import TopBar from "@/components/TopBar";
 import GridDiagram from "@/components/GridDiagram";
 import LiveDataPanel from "@/components/LiveDataPanel";
 import ControlPanel from "@/components/ControlPanel";
+import AIGridAgent from "@/components/AIGridAgent";
 
 const Dashboard = () => {
   const [solarOutput, setSolarOutput] = useState(45);
@@ -101,6 +102,17 @@ const Dashboard = () => {
             demoRunning={demoRunning}
           />
         </div>
+      </div>
+
+      {/* AI Grid Agent Panel */}
+      <div className="p-3 pt-0">
+        <AIGridAgent
+          solarOutput={solarOutput}
+          voltage={voltage}
+          loadDemand={loadDemand}
+          isReversed={isReversed}
+          systemStatus={systemStatus}
+        />
       </div>
     </div>
   );
