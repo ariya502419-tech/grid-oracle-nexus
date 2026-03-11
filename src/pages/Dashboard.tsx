@@ -103,6 +103,17 @@ const Dashboard = () => {
           />
         </div>
       </div>
+
+      {/* AI Grid Agent Panel */}
+      <div className="p-3 pt-0">
+        <AIGridAgent
+          solarOutput={solarOutput}
+          voltage={voltage}
+          loadDemand={loadDemand}
+          isReversed={isReversed}
+          systemStatus={systemStatus}
+        />
+      </div>
     </div>
   );
 };
